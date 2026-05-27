@@ -1,26 +1,155 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-gold: #c8a84b;
+  --color-gold-bright: #e8c96a;
+  --color-rust: #8b3a1f;
+  --color-deep: #0a0806;
+  --color-ink: #12100e;
+  --color-smoke: #1e1a16;
+  --color-ash: #2a2520;
+  --color-parchment: #c4a882;
+  --color-cream: #f0e6d0;
+  --color-off-white: #faf5ed;
+  --color-muted: #6b5f4f;
+  --color-danger: #cc3300;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-cinzel: var(--font-cinzel), serif;
+  --font-cinzel-decorative: var(--font-cinzel-decorative), serif;
+  --font-im-fell: var(--font-im-fell), serif;
+  --font-rajdhani: var(--font-rajdhani), sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-spin-slow: spin 120s linear infinite;
+  --animate-spin-reverse: spin 80s linear infinite reverse;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulseGlow 3s ease-in-out infinite;
+  --animate-blink: blink 1s infinite;
+  --animate-ticker: ticker 20s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+  @keyframes ticker {
+    from { transform: translateX(100%); }
+    to: { transform: translateX(-100%); }
   }
 }
 
+:root {
+  --gold: #c8a84b;
+  --gold-bright: #e8c96a;
+  --rust: #8b3a1f;
+  --deep: #0a0806;
+  --ink: #12100e;
+  --smoke: #1e1a16;
+  --ash: #2a2520;
+  --parchment: #c4a882;
+  --cream: #f0e6d0;
+  --off-white: #faf5ed;
+  --muted: #6b5f4f;
+  --danger: #cc3300;
+}
+
+/* Custom Base Resets and Premium Aesthetics */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--deep);
+  color: var(--off-white);
+  overflow-x: hidden;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--deep);
+  color: var(--off-white);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Styled Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-bright);
+}
+
+/* Ornate Corners via pseudo-elements */
+.ornate-box {
+  position: relative;
+  border: 1px solid rgba(200, 168, 75, 0.2);
+  background: rgba(18, 16, 14, 0.8);
+}
+.ornate-box::before, .ornate-box::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--gold);
+}
+/* top-left & bottom-right */
+.ornate-box::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+.ornate-box::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+/* CRT TV Screen Scanning Lines overlay */
+.crt-overlay {
+  position: relative;
+  overflow: hidden;
+}
+.crt-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(18, 16, 14, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.06),
+    rgba(0, 255, 0, 0.02),
+    rgba(0, 0, 255, 0.06)
+  );
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Custom Focus Ring Styles for A11y */
+*:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 4px;
+}
+
+/* Selection Highlight */
+::selection {
+  background: var(--rust);
+  color: var(--off-white);
 }

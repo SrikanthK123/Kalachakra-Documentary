@@ -1,65 +1,83 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+import { useState } from 'react'
+import { NavBar } from '@/components/ui/NavBar'
+import { CustomCursor } from '@/components/ui/CustomCursor'
+import { AmbientAudio } from '@/components/ui/AmbientAudio'
+import { HeroSection } from '@/components/sections/HeroSection'
+import { PrologueSection } from '@/components/sections/PrologueSection'
+import { ChapterSection } from '@/components/sections/ChapterSection'
+import { CompassSection } from '@/components/sections/CompassSection'
+import { AsteroidSection } from '@/components/sections/AsteroidSection'
+import { BreakingNewsSection } from '@/components/sections/BreakingNewsSection'
+import { OtherWorldSection } from '@/components/sections/OtherWorldSection'
+import { ClimaxSection } from '@/components/sections/ClimaxSection'
+import { EpilogueSection } from '@/components/sections/EpilogueSection'
+import { OutroSection } from '@/components/sections/OutroSection'
+import { chapters } from '@/lib/chapterData'
+import { SplashScreen } from '@/components/ui/SplashScreen'
+
+export default function Page() {
+  const [language, setLanguage] = useState<'english' | 'hindi' | 'telugu'>('english')
+  const [hasEntered, setHasEntered] = useState(false)
+
+  if (!hasEntered) {
+    return (
+      <main className="relative bg-black w-full min-h-screen">
+        <CustomCursor />
+        <SplashScreen onComplete={() => setHasEntered(true)} />
       </main>
-    </div>
-  );
+    )
+  }
+
+  return (
+    <main className="relative bg-deep text-off-white selection:bg-rust selection:text-white w-full min-h-screen">
+      {/* Dynamic Utilities Layer */}
+      <NavBar currentLanguage={language} onLanguageChange={setLanguage} />
+      <CustomCursor />
+      <AmbientAudio />
+
+      {/* 1. Hero & Prologue Initial Scroll */}
+      <HeroSection language={language} />
+      <PrologueSection language={language} />
+
+      {/* 2. Chapters and Story Flow */}
+      {chapters.map((ch, i) => {
+        const elements = []
+
+        // Render the main chapter component
+        if (ch.id === 'ch23') {
+          elements.push(<EpilogueSection key={ch.id} language={language} />)
+        } else if (ch.id === 'climax') {
+          elements.push(
+            <ChapterSection key={ch.id} chapter={ch} index={i} language={language} showDivider={false} />
+          )
+          elements.push(<ClimaxSection key="climax-special" />)
+        } else {
+          elements.push(
+            <ChapterSection key={ch.id} chapter={ch} index={i} language={language} showDivider={ch.id !== 'ch22'} />
+          )
+        }
+
+        // Insert special visual sections after specific chapters
+        if (ch.id === 'ch2') {
+          elements.push(<CompassSection key="compass-section" />)
+        }
+        if (ch.id === 'ch9-10') {
+          elements.push(<BreakingNewsSection key="breaking-news" />)
+        }
+        if (ch.id === 'world_changes') {
+          elements.push(<AsteroidSection key="asteroid-section" />)
+        }
+        if (ch.id === 'ch11') {
+          elements.push(<OtherWorldSection key="other-world" />)
+        }
+
+        return elements
+      })}
+
+      {/* 3. OutroCTA */}
+      <OutroSection />
+    </main>
+  )
 }
