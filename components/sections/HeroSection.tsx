@@ -101,7 +101,7 @@ export function HeroSection({ language = 'english' }: HeroSectionProps) {
       <div 
         className="absolute inset-0 z-0 bg-contain bg-center bg-no-repeat transition-transform duration-1000"
         style={{ 
-          backgroundImage: `url('/Image/LordVishnuInCave.png')`,
+          backgroundImage: `url('/Kalachakra-Documentary/Image/LordVishnuInCave.png')`,
           maskImage: 'radial-gradient(ellipse at center, black 50%, transparent 100%)',
           WebkitMaskImage: 'radial-gradient(ellipse at center, black 50%, transparent 100%)'
         }}

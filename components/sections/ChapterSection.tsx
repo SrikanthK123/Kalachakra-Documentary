@@ -36,10 +36,10 @@ export function ChapterSection({
   // Alternating configurations based on section index
   const isArtLeft = index % 2 === 0
   const bgImages = [
-    '/Image/CaveGods1.png',
-    '/Image/CaveGods2.png',
-    '/Image/AllGodsViewWithVara.png',
-    '/Image/AllGodsInCave2.png'
+    '/Kalachakra-Documentary/Image/CaveGods1.png',
+    '/Kalachakra-Documentary/Image/CaveGods2.png',
+    '/Kalachakra-Documentary/Image/AllGodsViewWithVara.png',
+    '/Kalachakra-Documentary/Image/AllGodsInCave2.png'
   ]
   const bgImage = bgImages[index % bgImages.length]
 

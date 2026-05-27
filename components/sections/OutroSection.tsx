@@ -21,7 +21,7 @@ export function OutroSection() {
       <div 
         className="absolute inset-0 z-0 opacity-100"
         style={{
-          backgroundImage: "url('/Image/PostCreditPoster.png')",
+          backgroundImage: "url('/Kalachakra-Documentary/Image/PostCreditPoster.png')",
           backgroundSize: "cover",
           backgroundPosition: "top center",
           backgroundRepeat: "no-repeat",

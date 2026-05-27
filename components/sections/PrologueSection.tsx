@@ -94,7 +94,7 @@ export function PrologueSection({ language = 'english' }: PrologueSectionProps) 
       <div 
         className="absolute inset-0 z-0 opacity-10"
         style={{
-          backgroundImage: "url('/Image/CaveBG1.png')",
+          backgroundImage: "url('/Kalachakra-Documentary/Image/CaveBG1.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed"
@@ -104,7 +104,7 @@ export function PrologueSection({ language = 'english' }: PrologueSectionProps) 
       <motion.div 
         className="absolute inset-0 z-0 opacity-50 mix-blend-screen"
         style={{
-          backgroundImage: "url('/Image/CaveBG1.png')",
+          backgroundImage: "url('/Kalachakra-Documentary/Image/CaveBG1.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",

@@ -143,7 +143,7 @@ export function EpilogueSection({ language }: EpilogueSectionProps) {
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000"
         style={{ 
-          backgroundImage: `url('/Image/SankritSlokamWideView.png')`,
+          backgroundImage: `url('/Kalachakra-Documentary/Image/SankritSlokamWideView.png')`,
           maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
           WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
         }}

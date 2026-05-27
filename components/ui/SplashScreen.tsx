@@ -26,7 +26,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
       <div 
         className="absolute inset-0 z-0 opacity-20 bg-[length:auto_165%] bg-bottom md:bg-[length:cover] md:bg-center"
         style={{
-          backgroundImage: "url('/Image/CompasstitleNVara.png')",
+          backgroundImage: "url('/Kalachakra-Documentary/Image/CompasstitleNVara.png')",
         }}
       />
 
@@ -34,7 +34,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
       <div 
         className="absolute inset-0 z-0 opacity-60 pointer-events-none bg-[length:auto_165%] bg-bottom md:hidden"
         style={{
-          backgroundImage: "url('/Image/CompasstitleNVara.png')",
+          backgroundImage: "url('/Kalachakra-Documentary/Image/CompasstitleNVara.png')",
           maskImage: "radial-gradient(300px circle at 50% 42%, black, transparent 80%)",
           WebkitMaskImage: "radial-gradient(300px circle at 50% 42%, black, transparent 80%)",
         }}
@@ -44,7 +44,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
       <div 
         className="absolute inset-0 z-0 opacity-60 pointer-events-none bg-[length:cover] bg-center hidden md:block"
         style={{
-          backgroundImage: "url('/Image/CompasstitleNVara.png')",
+          backgroundImage: "url('/Kalachakra-Documentary/Image/CompasstitleNVara.png')",
           maskImage: "radial-gradient(300px circle at center, black, transparent 80%)",
           WebkitMaskImage: "radial-gradient(300px circle at center, black, transparent 80%)",
         }}
@@ -54,7 +54,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
       <motion.div
         className="absolute inset-0 z-0 opacity-100 pointer-events-none bg-[length:auto_165%] bg-bottom md:bg-[length:cover] md:bg-center"
         style={{
-          backgroundImage: "url('/Image/CompasstitleNVara.png')",
+          backgroundImage: "url('/Kalachakra-Documentary/Image/CompasstitleNVara.png')",
           maskImage: useMotionTemplate`radial-gradient(350px circle at ${mouseX}px ${mouseY}px, black, transparent 80%)`,
           WebkitMaskImage: useMotionTemplate`radial-gradient(350px circle at ${mouseX}px ${mouseY}px, black, transparent 80%)`,
         }}

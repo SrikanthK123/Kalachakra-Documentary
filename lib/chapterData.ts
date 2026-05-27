@@ -16,7 +16,7 @@ export const chapters: Chapter[] = [
     artType: 'mandala',
     layout: 'left',
     atmosphere: 'cosmic',
-    image: '/Image/TempleImageB&W.png',
+    image: '/Kalachakra-Documentary/Image/TempleImageB&W.png',
     translations: {
       hindi: {
         number: 'प्रस्तावना',
@@ -58,7 +58,7 @@ export const chapters: Chapter[] = [
     artType: 'researcher',
     layout: 'right',
     atmosphere: 'normal',
-    image: '/Image/VaraIntro.png',
+    image: '/Kalachakra-Documentary/Image/VaraIntro.png',
     translations: {
       hindi: {
         number: 'अध्याय I',
@@ -98,8 +98,8 @@ export const chapters: Chapter[] = [
     artType: 'temple',
     layout: 'left',
     atmosphere: 'normal',
-    image: '/Image/VaraVisitedTemple.png',
-    hoverImage: '/Image/VaraInsideTheTemple.png',
+    image: '/Kalachakra-Documentary/Image/VaraVisitedTemple.png',
+    hoverImage: '/Kalachakra-Documentary/Image/VaraInsideTheTemple.png',
     translations: {
       hindi: {
         number: 'अध्याय II',
@@ -138,8 +138,8 @@ export const chapters: Chapter[] = [
     artType: 'night',
     layout: 'right',
     atmosphere: 'cosmic',
-    image: '/Image/VaraVisitedTempleAtNight.png',
-    hoverImage: '/Image/VaraVistedCaveDoorAtNight.png',
+    image: '/Kalachakra-Documentary/Image/VaraVisitedTempleAtNight.png',
+    hoverImage: '/Kalachakra-Documentary/Image/VaraVistedCaveDoorAtNight.png',
     translations: {
       hindi: {
         number: 'अध्याय III',
@@ -176,8 +176,8 @@ export const chapters: Chapter[] = [
     artType: 'cave',
     layout: 'left',
     atmosphere: 'cosmic',
-    image: '/Image/VaraVisitedInsideTheCave.png',
-    hoverImage: '/Image/FlashLightInsideCave.png',
+    image: '/Kalachakra-Documentary/Image/VaraVisitedInsideTheCave.png',
+    hoverImage: '/Kalachakra-Documentary/Image/FlashLightInsideCave.png',
     translations: {
       hindi: {
         number: 'अध्याय IV — V',
@@ -215,8 +215,8 @@ export const chapters: Chapter[] = [
     artType: 'compass',
     layout: 'right',
     atmosphere: 'cosmic',
-    image: '/Image/VaraHoldCompass1.png',
-    hoverImage: '/Image/VaraHoldCompassCloseShot2.png',
+    image: '/Kalachakra-Documentary/Image/VaraHoldCompass1.png',
+    hoverImage: '/Kalachakra-Documentary/Image/VaraHoldCompassCloseShot2.png',
     translations: {
       hindi: {
         number: 'अध्याय VI — VII',
@@ -256,8 +256,8 @@ export const chapters: Chapter[] = [
     artType: 'asteroid',
     layout: 'left',
     atmosphere: 'danger',
-    image: '/Image/VaraBeforePressedCompassButoonInCave.png',
-    hoverImage: '/Image/VaraPressedCompassButoonInCave.png',
+    image: '/Kalachakra-Documentary/Image/VaraBeforePressedCompassButoonInCave.png',
+    hoverImage: '/Kalachakra-Documentary/Image/VaraPressedCompassButoonInCave.png',
     translations: {
       hindi: {
         number: 'अध्याय VIII',
@@ -296,8 +296,8 @@ export const chapters: Chapter[] = [
     artType: 'news',
     layout: 'right',
     atmosphere: 'danger',
-    image: '/Image/VaraReturnToHomwFromCave.png',
-    hoverImage: '/Image/VaraRunAwayFromTemple.png',
+    image: '/Kalachakra-Documentary/Image/VaraReturnToHomwFromCave.png',
+    hoverImage: '/Kalachakra-Documentary/Image/VaraRunAwayFromTemple.png',
     translations: {
       hindi: {
         number: 'अध्याय IX — X',
@@ -335,7 +335,7 @@ export const chapters: Chapter[] = [
     artType: 'mandala',
     layout: 'left',
     atmosphere: 'danger',
-    image: '/Image/VaraNTeamgather.png',
+    image: '/Kalachakra-Documentary/Image/VaraNTeamgather.png',
     translations: {
       hindi: {
         number: 'परिणाम',
@@ -376,7 +376,7 @@ export const chapters: Chapter[] = [
     artType: 'temple',
     layout: 'right',
     atmosphere: 'cosmic',
-    image: '/Image/TempleDisappears.png',
+    image: '/Kalachakra-Documentary/Image/TempleDisappears.png',
     translations: {
       hindi: {
         number: 'अध्याय XI',
@@ -419,8 +419,8 @@ export const chapters: Chapter[] = [
     artType: 'descent',
     layout: 'left',
     atmosphere: 'cosmic',
-    image: '/Image/VaraAndTeamVisitedTemple.png',
-    hoverImage: '/Image/VaraNTeamStartInCave.png',
+    image: '/Kalachakra-Documentary/Image/VaraAndTeamVisitedTemple.png',
+    hoverImage: '/Kalachakra-Documentary/Image/VaraNTeamStartInCave.png',
     translations: {
       hindi: {
         number: 'अध्याय XII',
@@ -463,7 +463,7 @@ export const chapters: Chapter[] = [
     artType: 'cave',
     layout: 'right',
     atmosphere: 'cosmic',
-    image: '/Image/Vara&CoDeeppCave.png',
+    image: '/Kalachakra-Documentary/Image/Vara&CoDeeppCave.png',
     translations: {
       hindi: {
         number: 'अध्याय XIII',
@@ -504,7 +504,7 @@ export const chapters: Chapter[] = [
     artType: 'balanceWarning',
     layout: 'left',
     atmosphere: 'cosmic',
-    image: '/Image/AncientCaveEntranceB&W.png',
+    image: '/Kalachakra-Documentary/Image/AncientCaveEntranceB&W.png',
     translations: {
       hindi: {
         number: 'अंतिम रहस्य',
@@ -542,7 +542,7 @@ export const chapters: Chapter[] = [
     artType: 'mandala',
     layout: 'right',
     atmosphere: 'cosmic',
-    image: '/Image/VaraThinkingInCave.png',
+    image: '/Kalachakra-Documentary/Image/VaraThinkingInCave.png',
     translations: {
       hindi: {
         number: 'अध्याय XX',
@@ -581,7 +581,7 @@ export const chapters: Chapter[] = [
     artType: 'temple',
     layout: 'left',
     atmosphere: 'cosmic',
-    image: '/Image/SecretVishnuCave1.png',
+    image: '/Kalachakra-Documentary/Image/SecretVishnuCave1.png',
     translations: {
       hindi: {
         number: 'अध्याय XXI',
@@ -620,8 +620,8 @@ export const chapters: Chapter[] = [
     artType: 'cave',
     layout: 'right',
     atmosphere: 'fire',
-    image: '/Image/Vara&CoFindSecretWay.png',
-    hoverImage: '/Image/VaraFindNewUniverse.png',
+    image: '/Kalachakra-Documentary/Image/Vara&CoFindSecretWay.png',
+    hoverImage: '/Kalachakra-Documentary/Image/VaraFindNewUniverse.png',
     translations: {
       hindi: {
         number: 'अध्याय XXII',
@@ -663,8 +663,8 @@ export const chapters: Chapter[] = [
     artType: 'compass',
     layout: 'right',
     atmosphere: 'danger',
-    image: '/Image/VaraSad.png',
-    hoverImage: '/Image/VaraDisappears.png',
+    image: '/Kalachakra-Documentary/Image/VaraSad.png',
+    hoverImage: '/Kalachakra-Documentary/Image/VaraDisappears.png',
     translations: {
       hindi: {
         number: 'अध्याय XXIII',
@@ -707,7 +707,7 @@ export const chapters: Chapter[] = [
     artType: 'mandala',
     layout: 'left',
     atmosphere: 'cosmic',
-    image: '/Image/SanskritWallText.png',
+    image: '/Kalachakra-Documentary/Image/SanskritWallText.png',
     translations: {
       hindi: {
         number: 'उपसंहार',
@@ -752,8 +752,8 @@ export const chapters: Chapter[] = [
     artType: 'mandala',
     layout: 'right',
     atmosphere: 'cosmic',
-    image: '/Image/SanskritWallText.png',
-    hoverImage: '/Image/SankritSlokamWideView.png',
+    image: '/Kalachakra-Documentary/Image/SanskritWallText.png',
+    hoverImage: '/Kalachakra-Documentary/Image/SankritSlokamWideView.png',
     translations: {
       hindi: {
         number: 'अंतिम शीर्षक',
