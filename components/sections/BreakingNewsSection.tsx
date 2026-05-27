@@ -78,7 +78,7 @@ export function BreakingNewsSection() {
             {/* Right Column: Live Feed TV Screenshot */}
             <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden border border-danger/30 shadow-[0_0_20px_rgba(204,51,0,0.12)] group">
               <img
-                src="/Image/VaraWakeUpNewsReport.png"
+                src="/Kalachakra-Documentary/Image/VaraWakeUpNewsReport.png"
                 alt="Breaking News Live Report"
                 className="w-full h-full object-cover object-center brightness-90 group-hover:scale-[1.02] transition-transform duration-700 pointer-events-none"
               />

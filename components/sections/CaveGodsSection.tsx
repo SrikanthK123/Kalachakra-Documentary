@@ -216,13 +216,13 @@ export function CaveGodsSection({ language }: CaveGodsSectionProps) {
 
             <div className="flex flex-col gap-8">
               <GodCard 
-                imageSrc="/Image/CaveGods1.png"
+                imageSrc="/Kalachakra-Documentary/Image/CaveGods1.png"
                 title={activeText.cards[0].title}
                 desc={activeText.cards[0].desc}
                 layout="left"
               />
               <GodCard 
-                imageSrc="/Image/AllGodsViewWithVara.png"
+                imageSrc="/Kalachakra-Documentary/Image/AllGodsViewWithVara.png"
                 title={activeText.cards[1].title}
                 desc={activeText.cards[1].desc}
                 layout="left"
@@ -247,13 +247,13 @@ export function CaveGodsSection({ language }: CaveGodsSectionProps) {
 
             <div className="flex flex-col gap-8">
               <GodCard 
-                imageSrc="/Image/CaveGods2.png"
+                imageSrc="/Kalachakra-Documentary/Image/CaveGods2.png"
                 title={activeText.cards[2].title}
                 desc={activeText.cards[2].desc}
                 layout="right"
               />
               <GodCard 
-                imageSrc="/Image/AllGodsInCave2.png"
+                imageSrc="/Kalachakra-Documentary/Image/AllGodsInCave2.png"
                 title={activeText.cards[3].title}
                 desc={activeText.cards[3].desc}
                 layout="right"
