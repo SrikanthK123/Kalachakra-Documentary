@@ -529,6 +529,7 @@ export function ChapterArt({
     }
 
     const glowClass = atmosphereGlowMap[atmosphere] || atmosphereGlowMap.normal
+    const effectiveHoverImage = hoverImage || (extraImages && extraImages.length > 0 ? extraImages[0] : undefined)
     const allImages = [image, hoverImage, ...extraImages].filter(Boolean) as string[]
 
     return (
@@ -546,15 +547,15 @@ export function ChapterArt({
           className="absolute inset-0 w-full h-full object-cover object-center z-10"
           animate={{ 
             scale: isHovered ? 1.05 : 1,
-            filter: isHovered && hoverImage ? 'brightness(0.7) blur(2px)' : 'brightness(0.9) blur(0px)'
+            filter: isHovered && effectiveHoverImage ? 'brightness(0.7) blur(2px)' : 'brightness(0.9) blur(0px)'
           }}
           transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
         />
 
         {/* Cinematic Cross-Fade Hover Image */}
-        {hoverImage && (
+        {effectiveHoverImage && (
           <motion.img
-            src={hoverImage}
+            src={effectiveHoverImage}
             alt={`${artType} scene transition`}
             className="absolute inset-0 w-full h-full object-cover object-center z-20 pointer-events-none"
             initial={{ opacity: 0 }}
@@ -647,7 +648,7 @@ export function ChapterArt({
                 >
                   {/* Dynamic Images */}
                   {allImages.map((imgSrc, idx) => (
-                    <div key={idx} className="w-full flex-shrink-0 snap-center flex items-center justify-center relative p-2 aspect-[16/9] md:aspect-auto">
+                    <div key={idx} className="w-full h-[60vh] md:h-auto flex-shrink-0 snap-center flex items-center justify-center relative p-2 md:aspect-auto">
                       <img
                         src={imgSrc}
                         alt={`${chapterTitle} scene ${idx + 1}`}

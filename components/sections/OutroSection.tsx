@@ -1,8 +1,21 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useState, useEffect, useMemo } from 'react'
 
 export function OutroSection() {
+  const [isMounted, setIsMounted] = useState(false)
+  useEffect(() => { setIsMounted(true) }, [])
+
+  const particles = useMemo(() =>
+    Array.from({ length: 12 }, () => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 3}s`,
+      animationDuration: `${1.5 + Math.random() * 2}s`,
+    })),
+  [])
+
   const handleReset = () => {
     // Smooth scroll back to the top of the teaser to reset the experience
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -29,18 +42,13 @@ export function OutroSection() {
       />
       <div className="absolute inset-0 z-0 bg-black/40 pointer-events-none" />
 
-      {/* 1. Subtle Floating Gold Particles Overlay */}
+      {/* 1. Subtle Floating Gold Particles Overlay — client-only */}
       <div className="absolute inset-0 pointer-events-none opacity-25 z-0">
-        {Array.from({ length: 12 }).map((_, i) => (
+        {isMounted && particles.map((p, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 rounded-full bg-gold-bright animate-pulse"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${1.5 + Math.random() * 2}s`,
-            }}
+            style={p}
           />
         ))}
       </div>

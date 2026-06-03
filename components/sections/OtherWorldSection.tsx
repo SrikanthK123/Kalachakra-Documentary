@@ -1,9 +1,22 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useState, useEffect, useMemo } from 'react'
 import { SectionDivider } from '../ui/SectionDivider'
 
 export function OtherWorldSection() {
+  const [isMounted, setIsMounted] = useState(false)
+  useEffect(() => { setIsMounted(true) }, [])
+
+  const embers = useMemo(() =>
+    Array.from({ length: 15 }, () => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 4}s`,
+      animationDuration: `${2 + Math.random() * 3}s`,
+    })),
+  [])
+
   const anomalies = [
     {
       label: 'ATMOSPHERE',
@@ -46,18 +59,13 @@ export function OtherWorldSection() {
       id="other-world-showcase"
       className="relative w-full py-24 px-6 md:px-12 bg-[linear-gradient(135deg,#1f0a02_0%,#090301_70%)] flex flex-col items-center justify-center overflow-hidden select-none"
     >
-      {/* Floating Ember Particles Overlay */}
+      {/* Floating Ember Particles Overlay — client-only */}
       <div className="absolute inset-0 pointer-events-none opacity-20 z-0">
-        {Array.from({ length: 15 }).map((_, i) => (
+        {isMounted && embers.map((e, i) => (
           <div
             key={i}
             className="absolute w-1.5 h-1.5 rounded-full bg-danger animate-pulse"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 4}s`,
-              animationDuration: `${2 + Math.random() * 3}s`,
-            }}
+            style={e}
           />
         ))}
       </div>

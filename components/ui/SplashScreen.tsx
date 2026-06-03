@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useMotionValue, useMotionTemplate } from 'framer-motion'
-import React from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 
 interface SplashScreenProps {
   onComplete: () => void
@@ -10,6 +10,20 @@ interface SplashScreenProps {
 export function SplashScreen({ onComplete }: SplashScreenProps) {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => { setIsMounted(true) }, [])
+
+  // Generate stable random particle data only on the client
+  const particles = useMemo(() =>
+    Array.from({ length: 20 }, () => ({
+      x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
+      y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000),
+      opacity: Math.random() * 0.5 + 0.2,
+      yEnd: Math.random() * -100 - 50,
+      duration: Math.random() * 5 + 3,
+    })),
+  []) // runs once on client mount
 
   function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
     const { left, top } = currentTarget.getBoundingClientRect()
@@ -68,23 +82,23 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
         <div className="absolute top-[42%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-gold rounded-full blur-[100px] md:blur-[150px] opacity-20" />
       </div>
 
-      {/* Floating particles */}
+      {/* Floating particles — client-only to avoid SSR/hydration mismatch */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
-        {Array.from({ length: 20 }).map((_, i) => (
+        {isMounted && particles.map((p, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-gold rounded-full"
             initial={{
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000),
-              opacity: Math.random() * 0.5 + 0.2
+              x: p.x,
+              y: p.y,
+              opacity: p.opacity
             }}
             animate={{
-              y: [null, Math.random() * -100 - 50],
+              y: [null, p.yEnd],
               opacity: [null, 0]
             }}
             transition={{
-              duration: Math.random() * 5 + 3,
+              duration: p.duration,
               repeat: Infinity,
               ease: "linear"
             }}
