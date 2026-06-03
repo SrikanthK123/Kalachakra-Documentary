@@ -357,9 +357,12 @@ export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSea
 
             {/* Progress fill */}
             <motion.div
+              key={`${currentLanguage}-${currentSeason}`}
               className="h-full relative"
+              initial={{ width: 0 }}
+              animate={{ width: `${progress * 100}%` }}
+              transition={{ duration: 0.85, ease: 'easeOut' }}
               style={{
-                width: `${progress * 100}%`,
                 background:
                   currentSeason === 'S2'
                     ? 'linear-gradient(to right, #c8a84b, #e8881a, #cc5500)'
@@ -403,18 +406,18 @@ export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSea
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
             className="fixed top-20 left-1/2 -translate-x-1/2 z-50
-                       flex items-center gap-3 px-5 py-3 rounded-lg
+                       flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg
                        bg-ink/95 border border-gold/30 backdrop-blur-xl
-                       shadow-[0_4px_30px_rgba(0,0,0,0.7)]"
+                       shadow-[0_4px_30px_rgba(0,0,0,0.7)] w-[90%] max-w-xs md:w-auto md:px-5 md:py-3 md:gap-3"
             role="status"
             aria-live="polite"
           >
-            <SuryaMandala size={28} />
-            <div className="flex flex-col">
-              <span className="font-cinzel text-gold text-xs tracking-[0.25em] font-semibold">
+            <SuryaMandala size={22} />
+            <div className="flex flex-col text-left">
+              <span className="font-cinzel text-gold text-[10px] md:text-xs tracking-[0.18em] md:tracking-[0.25em] font-semibold leading-tight">
                 NAVAGRAHA AWAKENING
               </span>
-              <span className="font-rajdhani text-cream/55 text-[11px] tracking-widest uppercase">
+              <span className="font-rajdhani text-cream/55 text-[9px] md:text-[11px] tracking-wider md:tracking-widest uppercase mt-0.5 leading-tight">
                 The wheel turns again — Season II begins
               </span>
             </div>

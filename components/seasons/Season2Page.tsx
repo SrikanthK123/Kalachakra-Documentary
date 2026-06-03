@@ -149,10 +149,10 @@ function S2OpeningHero() {
   return (
     <div ref={ref} className="relative h-screen overflow-hidden flex items-center justify-center bg-black">
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
-        <div className="absolute inset-0 bg-contain bg-center bg-no-repeat bg-black" style={{ backgroundImage: "url('/Kalachakra-Documentary/Image/Season-2 Images/HeroPageS2.png')" }} />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/80 pointer-events-none" />
+        <div className="absolute inset-0 bg-cover md:bg-contain bg-center bg-no-repeat bg-black" style={{ backgroundImage: "url('/Kalachakra-Documentary/Image/Season-2 Images/HeroPageS2.png')" }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70 pointer-events-none" />
       </motion.div>
-      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle 75% 75% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.8) 55%, rgba(0,0,0,0.95) 100%)' }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.85) 100%)' }} />
       <FilmGrain />
 
       <motion.div 

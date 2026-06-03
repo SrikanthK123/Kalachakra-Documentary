@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect, useMemo } from 'react'
 
-export function OutroSection() {
+export function OutroSection({ onContinue }: { onContinue: () => void }) {
   const [isMounted, setIsMounted] = useState(false)
   useEffect(() => { setIsMounted(true) }, [])
 
@@ -19,10 +19,6 @@ export function OutroSection() {
   const handleReset = () => {
     // Smooth scroll back to the top of the teaser to reset the experience
     window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const handleAction = () => {
-    alert('Compass Calibration Initialized. Bracing for inter-universal feedback...')
   }
 
   return (
@@ -77,10 +73,10 @@ export function OutroSection() {
         <div className="flex flex-col sm:flex-row gap-6 items-center justify-center w-full max-w-md mt-2">
           {/* Main Primary Action */}
           <button
-            onClick={handleAction}
+            onClick={onContinue}
             className="w-full sm:w-auto px-8 py-3.5 border border-gold-bright bg-gold-bright text-ink font-rajdhani text-xs font-bold tracking-[0.25em] uppercase hover:bg-transparent hover:text-gold-bright transition-all duration-300 shadow-[0_0_25px_rgba(232,201,106,0.35)] cursor-pointer active:scale-95 hover:scale-105"
           >
-            CALIBRATE COMPASS
+            CONTINUE TO SEASON II
           </button>
           
           {/* Secondary Reset Action */}

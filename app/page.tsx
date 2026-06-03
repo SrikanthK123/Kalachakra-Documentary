@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import { NavBar, type Season } from '@/components/ui/NavBar'
 import { CustomCursor } from '@/components/ui/CustomCursor'
 import { AmbientAudio } from '@/components/ui/AmbientAudio'
@@ -19,16 +20,49 @@ import { chapters } from '@/lib/chapterData'
 import { SplashScreen } from '@/components/ui/SplashScreen'
 import { Season2Page } from '@/components/seasons/Season2Page'
 
-export default function Page() {
+export default function Page({ initialSeason = 'S1' }: { initialSeason?: Season }) {
+  const router = useRouter()
   const [language, setLanguage] = useState<'english' | 'hindi' | 'telugu'>('english')
   const [hasEntered, setHasEntered] = useState(false)
-  const [currentSeason, setCurrentSeason] = useState<Season>('S1')
+  const [currentSeason, setCurrentSeason] = useState<Season>(initialSeason)
+
+  // Skip splash screen if already entered in this browser session
+  useEffect(() => {
+    const entered = sessionStorage.getItem('has-entered-kalachakra')
+    if (entered === 'true') {
+      setHasEntered(true)
+    }
+  }, [])
+
+  // Keep state in sync if parent changes initialSeason
+  useEffect(() => {
+    setCurrentSeason(initialSeason)
+  }, [initialSeason])
+
+  // Scroll to top when season changes or page loads
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [currentSeason])
+
+  const handleEnter = () => {
+    setHasEntered(true)
+    sessionStorage.setItem('has-entered-kalachakra', 'true')
+  }
+
+  const handleSeasonChange = (s: Season) => {
+    setCurrentSeason(s)
+    if (s === 'S2') {
+      router.push('/season-2')
+    } else {
+      router.push('/')
+    }
+  }
 
   if (!hasEntered) {
     return (
       <main className="relative bg-black w-full min-h-screen">
         <CustomCursor />
-        <SplashScreen onComplete={() => setHasEntered(true)} />
+        <SplashScreen onComplete={handleEnter} />
       </main>
     )
   }
@@ -40,7 +74,7 @@ export default function Page() {
         currentLanguage={language}
         onLanguageChange={setLanguage}
         currentSeason={currentSeason}
-        onSeasonChange={setCurrentSeason}
+        onSeasonChange={handleSeasonChange}
       />
       <CustomCursor />
       <AmbientAudio />
@@ -85,7 +119,7 @@ export default function Page() {
             })}
 
             {/* 3. Outro CTA */}
-            <OutroSection />
+            <OutroSection onContinue={() => handleSeasonChange('S2')} />
           </motion.div>
         ) : (
           <motion.div
