@@ -13,6 +13,8 @@ import {
   useScroll,
   useTransform,
   AnimatePresence,
+  useMotionValue,
+  useMotionTemplate,
 } from 'framer-motion'
 import { season2Chapters, type S2ChapterData, type S2Line } from '@/lib/season2Data'
 import { ChapterArt } from '@/components/chapters/ChapterArt'
@@ -275,12 +277,69 @@ function S2ChapterSection({ chapter, index, language, showDivider }: ChapterSect
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [isHovered, setIsHovered] = useState(false)
 
+  // Cursor-follow spotlight for Prologue (Season 1 style)
+  const prologueMouseX = useMotionValue(0)
+  const prologueMouseY = useMotionValue(0)
+  const prologueMask = useMotionTemplate`radial-gradient(500px circle at ${prologueMouseX}px ${prologueMouseY}px, black 0%, transparent 100%)`
+
+  // Cursor-follow spotlight for Chapter 2
+  const ch2MouseX = useMotionValue(0)
+  const ch2MouseY = useMotionValue(0)
+  const ch2Mask = useMotionTemplate`radial-gradient(500px circle at ${ch2MouseX}px ${ch2MouseY}px, black 0%, transparent 100%)`
+
+  // Cursor-follow spotlight for Chapter 4
+  const ch4MouseX = useMotionValue(0)
+  const ch4MouseY = useMotionValue(0)
+  const ch4Mask = useMotionTemplate`radial-gradient(500px circle at ${ch4MouseX}px ${ch4MouseY}px, black 0%, transparent 100%)`
+
+  // Cursor-follow spotlight for Chapter 6
+  const ch6MouseX = useMotionValue(0)
+  const ch6MouseY = useMotionValue(0)
+  const ch6Mask = useMotionTemplate`radial-gradient(500px circle at ${ch6MouseX}px ${ch6MouseY}px, black 0%, transparent 100%)`
+
+  // Cursor-follow spotlight for Chapter 9 (The Surya Gem)
+  const ch9MouseX = useMotionValue(0)
+  const ch9MouseY = useMotionValue(0)
+  const ch9Mask = useMotionTemplate`radial-gradient(500px circle at ${ch9MouseX}px ${ch9MouseY}px, black 0%, transparent 100%)`
+
+  // Cursor-follow spotlight for Chapter 11 (The Temple of Light)
+  const ch11MouseX = useMotionValue(0)
+  const ch11MouseY = useMotionValue(0)
+  const ch11Mask = useMotionTemplate`radial-gradient(500px circle at ${ch11MouseX}px ${ch11MouseY}px, black 0%, transparent 100%)`
+
+  // Cursor-follow spotlight for Chapter 16 (The Ashoka Chakram)
+  const ch16MouseX = useMotionValue(0)
+  const ch16MouseY = useMotionValue(0)
+  const ch16Mask = useMotionTemplate`radial-gradient(500px circle at ${ch16MouseX}px ${ch16MouseY}px, black 0%, transparent 100%)`
+
+  const isPrologue   = chapter.id === 's2-prologue'
+  const isChapter2   = chapter.id === 's2-ch2'
+  const isChapter4   = chapter.id === 's2-ch4'
+  const isChapter6   = chapter.id === 's2-ch6'
+  const isChapter9   = chapter.id === 's2-ch9'
+  const isChapter11  = chapter.id === 's2-ch11'
+  const isChapter16  = chapter.id === 's2-ch16'
+  const SURYA_GOD_IMAGE         = "url('/Kalachakra-Documentary/Image/Season-2 Images/SuryaGodImage.png')"
+  const VISHNU_27HRS_IMAGE      = "url('/Kalachakra-Documentary/Image/Season-2 Images/LordVishnuStatueWith27HrsS2-15.png')"
+  const UNIQUE_CAVE_1_IMAGE     = "url('/Kalachakra-Documentary/Image/Season-2 Images/UniqueCaveImage-1.png')"
+  const UNIQUE_CAVE_2_IMAGE     = "url('/Kalachakra-Documentary/Image/Season-2 Images/UniqueCaveImage-2.png')"
+  const VIRTUAL_COMPASS_IMAGE   = "url('/Kalachakra-Documentary/Image/Season-2 Images/VirtualCompassActivateInCaveSuryaS2-10.png')"
+  const LORD_SHIVA_CAVE_IMAGE   = "url('/Kalachakra-Documentary/Image/Season-2 Images/LordShivaCave.png')"
+  const SUN_TEMPLE_FRONT_IMAGE  = "url('/Kalachakra-Documentary/Image/Season-2 Images/FinalSunTempleFrontViewS2-44.png')"
+
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (!containerRef.current) return
     const rect = containerRef.current.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
     setMousePos({ x, y })
+    if (isPrologue) { prologueMouseX.set(x); prologueMouseY.set(y) }
+    if (isChapter2)  { ch2MouseX.set(x);  ch2MouseY.set(y)  }
+    if (isChapter4)  { ch4MouseX.set(x);  ch4MouseY.set(y)  }
+    if (isChapter6)  { ch6MouseX.set(x);  ch6MouseY.set(y)  }
+    if (isChapter9)  { ch9MouseX.set(x);  ch9MouseY.set(y)  }
+    if (isChapter11) { ch11MouseX.set(x); ch11MouseY.set(y) }
+    if (isChapter16) { ch16MouseX.set(x); ch16MouseY.set(y) }
   }
 
   const isArtLeft = index % 2 === 0
@@ -326,22 +385,208 @@ function S2ChapterSection({ chapter, index, language, showDivider }: ChapterSect
       onMouseLeave={() => setIsHovered(false)}
       className="relative w-full py-12 md:py-24 px-6 md:px-12 bg-black flex flex-col items-center justify-center overflow-hidden select-none"
     >
-      {/* Background Image Layer with Gradient Mask */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 opacity-[0.25]"
-        style={{
-          backgroundImage: `url('${chapter.imagePath}')`,
-          filter: `${filter} blur(4px)`,
-          maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
-        }}
-      />
-
-      {/* Flashlight Mask Overlay */}
-      <div
-        className="absolute inset-0 z-10 transition-all duration-300 pointer-events-none"
-        style={flashlightStyle}
-      />
+      {/* Background layers — Prologue, Ch2, Ch4, Ch6 use cursor-follow spotlight (Season 1 style) */}
+      {isPrologue ? (
+        <>
+          {/* Dim base: SuryaGodImage — full image (contain) */}
+          <div
+            className="absolute inset-0 z-0 bg-contain bg-center bg-no-repeat"
+            style={{
+              backgroundImage: SURYA_GOD_IMAGE,
+              opacity: 0.10,
+              maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+            }}
+          />
+          {/* Bright reveal layer: cursor spotlight, mix-blend-screen glows */}
+          <motion.div
+            className="absolute inset-0 z-0 bg-contain bg-center bg-no-repeat"
+            style={{
+              backgroundImage: SURYA_GOD_IMAGE,
+              opacity: 0.55,
+              mixBlendMode: 'screen',
+              maskImage: prologueMask,
+              WebkitMaskImage: prologueMask,
+            }}
+          />
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/85 via-black/30 to-black/90 pointer-events-none" />
+        </>
+      ) : isChapter2 ? (
+        <>
+          {/* Dim base: LordVishnuStatueWith27Hrs — full image (contain) */}
+          <div
+            className="absolute inset-0 z-0 bg-contain bg-center bg-no-repeat"
+            style={{
+              backgroundImage: VISHNU_27HRS_IMAGE,
+              opacity: 0.12,
+              maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+            }}
+          />
+          {/* Bright reveal layer: cursor spotlight, mix-blend-screen */}
+          <motion.div
+            className="absolute inset-0 z-0 bg-contain bg-center bg-no-repeat"
+            style={{
+              backgroundImage: VISHNU_27HRS_IMAGE,
+              opacity: 0.55,
+              mixBlendMode: 'screen',
+              maskImage: ch2Mask,
+              WebkitMaskImage: ch2Mask,
+            }}
+          />
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/85 via-black/30 to-black/90 pointer-events-none" />
+        </>
+      ) : isChapter4 ? (
+        <>
+          {/* Dim base: UniqueCaveImage-1 — positioned to show sun god face (upper-left deity carvings) */}
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: UNIQUE_CAVE_1_IMAGE,
+              backgroundPosition: '30% 30%',
+              opacity: 0.12,
+              maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+            }}
+          />
+          {/* Bright reveal layer: cursor spotlight reveals the god face */}
+          <motion.div
+            className="absolute inset-0 z-0 bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: UNIQUE_CAVE_1_IMAGE,
+              backgroundPosition: '30% 30%',
+              opacity: 0.55,
+              mixBlendMode: 'screen',
+              maskImage: ch4Mask,
+              WebkitMaskImage: ch4Mask,
+            }}
+          />
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/85 via-black/30 to-black/90 pointer-events-none" />
+        </>
+      ) : isChapter6 ? (
+        <>
+          {/* Dim base: UniqueCaveImage-2 — positioned to show central sun god shrine at top */}
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: UNIQUE_CAVE_2_IMAGE,
+              backgroundPosition: '50% 20%',
+              opacity: 0.12,
+              maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+            }}
+          />
+          {/* Bright reveal layer: cursor spotlight reveals the central god figure */}
+          <motion.div
+            className="absolute inset-0 z-0 bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: UNIQUE_CAVE_2_IMAGE,
+              backgroundPosition: '50% 20%',
+              opacity: 0.55,
+              mixBlendMode: 'screen',
+              maskImage: ch6Mask,
+              WebkitMaskImage: ch6Mask,
+            }}
+          />
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/85 via-black/30 to-black/90 pointer-events-none" />
+        </>
+      ) : isChapter9 ? (
+        <>
+          {/* Ch9 – The Surya Gem: VirtualCompassActivate — sun face in compass center, pos 50% 25% */}
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: VIRTUAL_COMPASS_IMAGE,
+              backgroundPosition: '50% 25%',
+              opacity: 0.12,
+              maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+            }}
+          />
+          <motion.div
+            className="absolute inset-0 z-0 bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: VIRTUAL_COMPASS_IMAGE,
+              backgroundPosition: '50% 25%',
+              opacity: 0.55,
+              mixBlendMode: 'screen',
+              maskImage: ch9Mask,
+              WebkitMaskImage: ch9Mask,
+            }}
+          />
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/85 via-black/30 to-black/90 pointer-events-none" />
+        </>
+      ) : isChapter11 ? (
+        <>
+          {/* Ch11 – The Temple of Light: LordShivaCave — Shiva face centered top, pos 50% 20% */}
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: LORD_SHIVA_CAVE_IMAGE,
+              backgroundPosition: '50% 20%',
+              opacity: 0.12,
+              maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+            }}
+          />
+          <motion.div
+            className="absolute inset-0 z-0 bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: LORD_SHIVA_CAVE_IMAGE,
+              backgroundPosition: '50% 20%',
+              opacity: 0.55,
+              mixBlendMode: 'screen',
+              maskImage: ch11Mask,
+              WebkitMaskImage: ch11Mask,
+            }}
+          />
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/85 via-black/30 to-black/90 pointer-events-none" />
+        </>
+      ) : isChapter16 ? (
+        <>
+          {/* Ch16 – The Ashoka Chakram: FinalSunTempleFrontView — solar eclipse top-center, pos 50% 15% */}
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: SUN_TEMPLE_FRONT_IMAGE,
+              backgroundPosition: '50% 15%',
+              opacity: 0.18,
+              maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+            }}
+          />
+          <motion.div
+            className="absolute inset-0 z-0 bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: SUN_TEMPLE_FRONT_IMAGE,
+              backgroundPosition: '50% 15%',
+              opacity: 0.60,
+              mixBlendMode: 'screen',
+              maskImage: ch16Mask,
+              WebkitMaskImage: ch16Mask,
+            }}
+          />
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/85 via-black/30 to-black/90 pointer-events-none" />
+        </>
+      ) : (
+        <>
+          {/* Default background for all other S2 chapters */}
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 opacity-[0.25]"
+            style={{
+              backgroundImage: `url('${chapter.imagePath}')`,
+              filter: `${filter} blur(4px)`,
+              maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+            }}
+          />
+          {/* Flashlight Mask Overlay */}
+          <div
+            className="absolute inset-0 z-10 transition-all duration-300 pointer-events-none"
+            style={flashlightStyle}
+          />
+        </>
+      )}
 
       {/* Translucent background Ghost Number */}
       <div

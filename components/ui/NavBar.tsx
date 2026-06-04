@@ -202,6 +202,7 @@ const S2_CHECKPOINTS = [
 export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSeasonChange }: NavBarProps) {
   const progress = useScrollProgress()
   const [showS2Banner, setShowS2Banner] = useState(false)
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
 
   const currentNavItems = NAV_DATA[currentSeason][currentLanguage] ?? NAV_DATA[currentSeason].english
 
@@ -327,27 +328,56 @@ export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSea
           <div className="w-full h-[4px] bg-gold/10 relative overflow-visible select-none">
             {/* Checkpoints for Season 2 */}
             {currentSeason === 'S2' && (
-              <div className="absolute inset-0 pointer-events-none overflow-visible z-20">
+              <div className="absolute inset-0 overflow-visible z-20" style={{ pointerEvents: 'none' }}>
                 {S2_CHECKPOINTS.map((cp, idx) => {
-                  const isReached = progress * 100 >= cp.percentage
+                  const isReached  = progress * 100 >= cp.percentage
+                  const isHovered  = hoveredIdx === idx
                   return (
                     <div
                       key={idx}
                       className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center"
-                      style={{ left: `${cp.percentage}%` }}
-                      title={cp.label}
+                      style={{ left: `${cp.percentage}%`, pointerEvents: 'auto' }}
+                      onMouseEnter={() => setHoveredIdx(idx)}
+                      onMouseLeave={() => setHoveredIdx(null)}
                     >
-                      {/* Checkpoint icon */}
-                      <img
+                      {/* Label above — shown on hover */}
+                      <AnimatePresence>
+                        {isHovered && (
+                          <motion.span
+                            key="label"
+                            initial={{ opacity: 0, y: 4, scale: 0.85 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 4, scale: 0.85 }}
+                            transition={{ duration: 0.18, ease: 'easeOut' }}
+                            className="absolute font-rajdhani font-bold tracking-widest uppercase whitespace-nowrap"
+                            style={{
+                              fontSize: '8px',
+                              color: '#e8c96a',
+                              top: 'calc(100% + 6px)',
+                              textShadow: '0 0 8px rgba(232,201,106,0.9)',
+                              letterSpacing: '0.18em',
+                            }}
+                          >
+                            {cp.label}
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
+
+                      {/* Icon — springs up on hover */}
+                      <motion.img
                         src={cp.iconPath}
                         alt={cp.label}
-                        className="w-7 h-7 md:w-9 md:h-9 object-contain transition-all duration-300"
-                        style={{
-                          filter: isReached
-                            ? 'brightness(1.1) drop-shadow(0 0 8px rgba(232,201,106,0.8))'
-                            : 'brightness(0.5) grayscale(0.7) drop-shadow(0 0 2px rgba(255,255,255,0.1))',
-                          transform: `scale(${isReached ? 1.05 : 0.95})`,
+                        className="object-contain cursor-pointer"
+                        animate={{
+                          scale: isHovered ? 1.85 : (isReached ? 1.05 : 0.95),
+                          filter: isHovered
+                            ? 'brightness(1.4) drop-shadow(0 0 12px rgba(232,201,106,1)) drop-shadow(0 0 4px rgba(255,200,80,0.9))'
+                            : isReached
+                              ? 'brightness(1.1) drop-shadow(0 0 8px rgba(232,201,106,0.8))'
+                              : 'brightness(0.5) grayscale(0.7) drop-shadow(0 0 2px rgba(255,255,255,0.1))',
                         }}
+                        transition={{ type: 'spring', stiffness: 380, damping: 22 }}
+                        style={{ width: 36, height: 36 }}
                       />
                     </div>
                   )
