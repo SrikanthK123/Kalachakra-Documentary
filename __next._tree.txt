@@ -1,4 +1,4 @@
-:HL["/Kalachakra-Documentary/_next/static/chunks/0a-_ez0i-g7ki.css","style"]
+:HL["/Kalachakra-Documentary/_next/static/chunks/0ygi8he_3u8rf.css","style"]
 :HL["/Kalachakra-Documentary/_next/static/media/0b7c5b993c1057ea-s.p.0m8c~y~fgqyrc.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/Kalachakra-Documentary/_next/static/media/278cbb97e75e04e2-s.p.0.yvvm36aa76d.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/Kalachakra-Documentary/_next/static/media/3206eb66b875a5b3-s.p.0newl065t398d.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -9,4 +9,4 @@
 :HL["/Kalachakra-Documentary/_next/static/media/cfa8380cafbbf487-s.p.0byao38h2ss-..woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/Kalachakra-Documentary/_next/static/media/d23f31b94ad01e54-s.p.091biwio0g5wn.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/Kalachakra-Documentary/_next/static/media/ea1df765ed99ddf9-s.p.00wb.edbz0smi.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"mDdg0q94DxTJ7o2dRvF05"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"WrhXskXhOxloJF0mRkAms"}
