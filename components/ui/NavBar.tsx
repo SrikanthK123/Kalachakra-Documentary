@@ -423,7 +423,7 @@ export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSea
                               : 'brightness(0.5) grayscale(0.7) drop-shadow(0 0 2px rgba(255,255,255,0.1))',
                         }}
                         transition={{ type: 'spring', stiffness: 380, damping: 22 }}
-                        style={{ width: 36, height: 36 }}
+                        style={{ width: cp.iconPath.includes('Vara_Unconscious') ? 56 : 36, height: 36 }}
                       />
                     </div>
                   )
