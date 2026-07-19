@@ -21,7 +21,7 @@ let urlsPrinted = false
 
 const child = spawn(
   'node',
-  ['node_modules/next/dist/bin/next', 'dev'],
+  ['node_modules/next/dist/bin/next', 'dev', '--webpack'],
   {
     stdio: ['inherit', 'pipe', 'pipe'],
     shell: false,
@@ -38,7 +38,7 @@ function patchLine(line) {
 
     // Print the patched startup block before the Ready line
     process.stdout.write(`\n`)
-    process.stdout.write(`   ▲ Next.js (Turbopack)\n`)
+    process.stdout.write(`   ▲ Next.js (Webpack)\n`)
     process.stdout.write(`   - Local:         ${localUrl}\n`)
     if (networkUrl) {
       process.stdout.write(`   - Network:       ${networkUrl}\n`)

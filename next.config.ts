@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig: NextConfig = {
   output: 'export',
   basePath: '/Kalachakra-Documentary',
-  assetPrefix: '/Kalachakra-Documentary',
+  assetPrefix: isProd ? '/Kalachakra-Documentary' : undefined,
   images: {
     unoptimized: true,
   },

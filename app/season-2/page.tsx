@@ -1,7 +1,7 @@
 'use client'
 
-import Page from '../page'
+import { MainPageContent } from '@/components/seasons/MainPageContent'
 
 export default function Season2Page() {
-  return <Page initialSeason="S2" />
+  return <MainPageContent initialSeason="S2" />
 }

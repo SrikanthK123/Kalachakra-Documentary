@@ -2,6 +2,6 @@
 
 import { MainPageContent } from '@/components/seasons/MainPageContent'
 
-export default function Page() {
-  return <MainPageContent initialSeason="S1" />
+export default function Season3Page() {
+  return <MainPageContent initialSeason="S3" />
 }

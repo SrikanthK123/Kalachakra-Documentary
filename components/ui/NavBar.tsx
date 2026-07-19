@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from 'react'
 import { SuryaMandala } from '@/components/seasons/Season2Page'
 
 type Language = 'english' | 'hindi' | 'telugu'
-export type Season = 'S1' | 'S2'
+export type Season = 'S1' | 'S2' | 'S3'
 
 interface NavBarProps {
   currentLanguage: Language
@@ -69,11 +69,35 @@ const NAV_DATA: Record<Season, Record<Language, NavItem[]>> = {
       { label: 'సూర్య మణి',  href: '#s2-surya-gem' },
     ],
   },
+  S3: {
+    english: [
+      { label: 'ENTRANCE',  href: '#s3-entrance' },
+      { label: 'BRIDGE',    href: '#s3-bridge' },
+      { label: 'TUNNELS',   href: '#s3-tunnels' },
+      { label: 'GUARDIAN',  href: '#s3-hanuman' },
+      { label: 'RAMA CAVE', href: '#s3-rama' },
+    ],
+    hindi: [
+      { label: 'प्रवेश द्वार', href: '#s3-entrance' },
+      { label: 'पुल',       href: '#s3-bridge' },
+      { label: 'सुरंगें',    href: '#s3-tunnels' },
+      { label: 'अभिभावक',   href: '#s3-hanuman' },
+      { label: 'राम गुफा',   href: '#s3-rama' },
+    ],
+    telugu: [
+      { label: 'ద్వారం',     href: '#s3-entrance' },
+      { label: 'వంతెన',     href: '#s3-bridge' },
+      { label: 'సొరంగాలు',  href: '#s3-tunnels' },
+      { label: 'రక్షకుడు',   href: '#s3-hanuman' },
+      { label: 'రామ గుహ',   href: '#s3-rama' },
+    ],
+  },
 }
 
 const SEASON_LABELS: Record<Season, string> = {
   S1: 'SEASON  I',
   S2: 'SEASON  II',
+  S3: 'SEASON  III',
 }
 
 // ─── Lock icon ────────────────────────────────────────────────────────────────
@@ -116,7 +140,7 @@ function SeasonDropdown({
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        {currentSeason === 'S2' ? (
+        {currentSeason === 'S2' || currentSeason === 'S3' ? (
           <SuryaMandala size={14} />
         ) : (
           <span className="text-gold text-sm leading-none select-none group-hover:animate-spin" style={{ animationDuration: '2s' }}>
@@ -150,7 +174,7 @@ function SeasonDropdown({
               <p className="font-rajdhani text-[9px] tracking-[0.3em] text-muted uppercase">Select Season</p>
             </div>
 
-            {(['S1', 'S2'] as Season[]).map((s) => {
+            {(['S1', 'S2', 'S3'] as Season[]).map((s) => {
               const isActive = currentSeason === s
               return (
                 <button
@@ -166,7 +190,7 @@ function SeasonDropdown({
                       className={`w-1.5 h-1.5 rounded-full flex-shrink-0 transition-all
                         ${isActive ? 'bg-gold shadow-[0_0_6px_rgba(200,168,75,0.8)]' : 'bg-muted/40'}`}
                     />
-                    {s === 'S2' ? (
+                    {s === 'S2' || s === 'S3' ? (
                       <div className="flex items-center gap-1.5">
                         <SuryaMandala size={14} />
                         <span className="font-rajdhani text-[11px] font-bold tracking-[0.2em]">{SEASON_LABELS[s]}</span>
@@ -191,26 +215,35 @@ function SeasonDropdown({
 }
 
 const S2_CHECKPOINTS = [
-  { percentage: 0,   iconPath: '/Kalachakra-Documentary/Image/Season-2 Images/TempleIcon.png', label: 'Temple' },
-  { percentage: 15,  iconPath: '/Kalachakra-Documentary/Image/Season-2 Images/CaveIcon.png', label: 'Cave' },
-  { percentage: 28,  iconPath: '/Kalachakra-Documentary/Image/Season-2 Images/LordVishnuIcon2.png', label: 'Vishnu' },
-  { percentage: 56,  iconPath: '/Kalachakra-Documentary/Image/Season-2 Images/SuryaGodIcon.png', label: 'Surya God' },
-  { percentage: 90,  iconPath: '/Kalachakra-Documentary/Image/Season-2 Images/SunTempleIcon.png', label: 'Sun Temple' }
+  { percentage: 0,   iconPath: '/Kalachakra-Documentary/Image/Season-2 Images/TempleIcon.png', label: 'Temple', href: '#s2-awakening' },
+  { percentage: 15,  iconPath: '/Kalachakra-Documentary/Image/Season-2 Images/CaveIcon.png', label: 'Cave', href: '#s2-split' },
+  { percentage: 28,  iconPath: '/Kalachakra-Documentary/Image/Season-2 Images/LordVishnuIcon2.png', label: 'Vishnu', href: '#s2-convergence' },
+  { percentage: 56,  iconPath: '/Kalachakra-Documentary/Image/Season-2 Images/SuryaGodIcon.png', label: 'Surya God', href: '#s2-reckoning' },
+  { percentage: 90,  iconPath: '/Kalachakra-Documentary/Image/Season-2 Images/SunTempleIcon.png', label: 'Sun Temple', href: '#s2-surya-gem' }
+]
+
+const S3_CHECKPOINTS = [
+  { percentage: 0,   iconPath: '/Kalachakra-Documentary/Image/New folder/Sun_Temple_Entrance-Final (1).png', label: 'Entrance', href: '#s3-entrance' },
+  { percentage: 20,  iconPath: '/Kalachakra-Documentary/Image/New folder/Broken_Bridge_Final.png', label: 'Bridge', href: '#s3-bridge' },
+  { percentage: 40,  iconPath: '/Kalachakra-Documentary/Image/New folder/Purple_Arrow_Final.png', label: 'Tunnels', href: '#s3-tunnels' },
+  { percentage: 60,  iconPath: '/Kalachakra-Documentary/Image/New folder/Gadha_Clue.png', label: 'Guardian', href: '#s3-hanuman' },
+  { percentage: 80,  iconPath: '/Kalachakra-Documentary/Image/New folder/Lord_Rama_Statue.png', label: 'Rama Cave', href: '#s3-rama' },
+  { percentage: 96,  iconPath: '/Kalachakra-Documentary/Image/New folder/Vara_Unconscious.png', label: 'Escape', href: '#s3-escape' }
 ]
 
 // ─── Main NavBar ──────────────────────────────────────────────────────────────
 export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSeasonChange }: NavBarProps) {
   const progress = useScrollProgress()
-  const [showS2Banner, setShowS2Banner] = useState(false)
+  const [showSeasonBanner, setShowSeasonBanner] = useState<'S2' | 'S3' | null>(null)
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
 
   const currentNavItems = NAV_DATA[currentSeason][currentLanguage] ?? NAV_DATA[currentSeason].english
 
   const handleSeasonChange = (s: Season) => {
     onSeasonChange(s)
-    if (s === 'S2') {
-      setShowS2Banner(true)
-      setTimeout(() => setShowS2Banner(false), 4000)
+    if (s === 'S2' || s === 'S3') {
+      setShowSeasonBanner(s)
+      setTimeout(() => setShowSeasonBanner(null), 4000)
     }
     // Scroll to top on season switch
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -239,7 +272,7 @@ export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSea
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
             className="flex items-center gap-2 font-cinzel-decorative font-bold text-lg text-gold-bright tracking-widest hover:text-white transition-colors flex-shrink-0"
           >
-            {currentSeason === 'S2' ? (
+            {currentSeason === 'S2' || currentSeason === 'S3' ? (
               <SuryaMandala size={20} />
             ) : (
               <span className="text-xl animate-spin-slow">☸</span>
@@ -288,9 +321,11 @@ export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSea
                         <span
                           className="absolute bottom-0 left-0 w-0 h-[1px] transition-all duration-300 group-hover:w-full"
                           style={{
-                            background: currentSeason === 'S2'
-                              ? 'linear-gradient(to right, #e8c96a, #cc5500)'
-                              : '#e8c96a',
+                            background: currentSeason === 'S3'
+                              ? 'linear-gradient(to right, #9333ea, #cc5500)'
+                              : currentSeason === 'S2'
+                                ? 'linear-gradient(to right, #e8c96a, #cc5500)'
+                                : '#e8c96a',
                           }}
                         />
                       )}
@@ -326,19 +361,24 @@ export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSea
         {/* ── Scroll progress bar ── */}
         <div className="px-6 md:px-12 w-full pb-1">
           <div className="w-full h-[4px] bg-gold/10 relative overflow-visible select-none">
-            {/* Checkpoints for Season 2 */}
-            {currentSeason === 'S2' && (
+            {/* Checkpoints for Season 2 and 3 */}
+            {(currentSeason === 'S2' || currentSeason === 'S3') && (
               <div className="absolute inset-0 overflow-visible z-20" style={{ pointerEvents: 'none' }}>
-                {S2_CHECKPOINTS.map((cp, idx) => {
+                {(currentSeason === 'S2' ? S2_CHECKPOINTS : S3_CHECKPOINTS).map((cp, idx) => {
                   const isReached  = progress * 100 >= cp.percentage
                   const isHovered  = hoveredIdx === idx
                   return (
                     <div
                       key={idx}
-                      className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center"
+                      className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center cursor-pointer"
                       style={{ left: `${cp.percentage}%`, pointerEvents: 'auto' }}
                       onMouseEnter={() => setHoveredIdx(idx)}
                       onMouseLeave={() => setHoveredIdx(null)}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        const target = document.querySelector(cp.href)
+                        if (target) target.scrollIntoView({ behavior: 'smooth' })
+                      }}
                     >
                       {/* Label above — shown on hover */}
                       <AnimatePresence>
@@ -349,14 +389,20 @@ export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSea
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 4, scale: 0.85 }}
                             transition={{ duration: 0.18, ease: 'easeOut' }}
-                            className="absolute font-rajdhani font-bold tracking-widest uppercase whitespace-nowrap"
+                            className={`absolute font-rajdhani font-bold tracking-widest uppercase whitespace-nowrap
+                              ${idx === 0 
+                                ? 'left-0 origin-left translate-x-0' 
+                                : idx === (currentSeason === 'S2' ? S2_CHECKPOINTS : S3_CHECKPOINTS).length - 1 
+                                  ? 'right-0 origin-right translate-x-0' 
+                                  : 'left-1/2 -translate-x-1/2'
+                              }`}
                             style={{
                               fontSize: '8px',
                               color: '#e8c96a',
                               top: 'calc(100% + 6px)',
                               textShadow: '0 0 8px rgba(232,201,106,0.9)',
                               letterSpacing: '0.18em',
-                            }}
+                             }}
                           >
                             {cp.label}
                           </motion.span>
@@ -367,7 +413,7 @@ export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSea
                       <motion.img
                         src={cp.iconPath}
                         alt={cp.label}
-                        className="object-contain cursor-pointer"
+                        className="object-contain"
                         animate={{
                           scale: isHovered ? 1.85 : (isReached ? 1.05 : 0.95),
                           filter: isHovered
@@ -394,30 +440,37 @@ export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSea
               transition={{ duration: 0.85, ease: 'easeOut' }}
               style={{
                 background:
-                  currentSeason === 'S2'
-                    ? 'linear-gradient(to right, #c8a84b, #e8881a, #cc5500)'
-                    : 'linear-gradient(to right, #c8a84b, #e8c96a, #c8a84b)',
+                  currentSeason === 'S3'
+                    ? 'linear-gradient(to right, #c8a84b, #9333ea, #cc5500)'
+                    : currentSeason === 'S2'
+                      ? 'linear-gradient(to right, #c8a84b, #e8881a, #cc5500)'
+                      : 'linear-gradient(to right, #c8a84b, #e8c96a, #c8a84b)',
               }}
               layoutId="scrollProgress"
             >
-              {/* Walking Vara icon at the tip for Season 2 */}
-              {currentSeason === 'S2' && (
+              {/* Walking Vara icon at the tip for Season 2 and 3 */}
+              {(currentSeason === 'S2' || currentSeason === 'S3') && (
                 <div
                   className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 flex items-center justify-center pointer-events-none z-30"
                 >
                   <motion.img
-                    src={progress >= 0.56 ? "/Kalachakra-Documentary/Image/Season-2 Images/VaraHoldsSunGemIcon.png" : "/Kalachakra-Documentary/Image/Season-2 Images/VaraLoadingChara.png"}
+                    src={currentSeason === 'S3'
+                      ? (progress >= 0.66 ? "/Kalachakra-Documentary/Image/Season-2 Images/VaraHoldsSunGemIcon.png" : "/Kalachakra-Documentary/Image/Season-2 Images/VaraLoadingChara.png")
+                      : (progress >= 0.56 ? "/Kalachakra-Documentary/Image/Season-2 Images/VaraHoldsSunGemIcon.png" : "/Kalachakra-Documentary/Image/Season-2 Images/VaraLoadingChara.png")}
                     alt="Vara Walking"
                     className="w-11 h-11 md:w-14 md:h-14 object-contain filter drop-shadow-[0_0_10px_rgba(232,201,106,0.95)]"
                     style={{ transformOrigin: 'bottom center' }}
                     animate={{
                       y: [0, -3, 0],
-                      rotate: [-5, 5, -5]
+                      rotate: [-5, 5, -5],
+                      opacity: currentSeason === 'S3' && progress >= 0.95 ? 0 : 1,
+                      scale: currentSeason === 'S3' && progress >= 0.95 ? 0 : 1
                     }}
                     transition={{
-                      duration: 0.65,
-                      repeat: Infinity,
-                      ease: "easeInOut"
+                      opacity: { duration: 0.35 },
+                      scale: { duration: 0.35 },
+                      y: { duration: 0.65, repeat: Infinity, ease: "easeInOut" },
+                      rotate: { duration: 0.65, repeat: Infinity, ease: "easeInOut" }
                     }}
                   />
                 </div>
@@ -427,9 +480,9 @@ export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSea
         </div>
       </motion.header>
 
-      {/* ── Season II toast banner ── */}
+      {/* ── Season II or III toast banner ── */}
       <AnimatePresence>
-        {showS2Banner && (
+        {showSeasonBanner && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -445,10 +498,12 @@ export function NavBar({ currentLanguage, onLanguageChange, currentSeason, onSea
             <SuryaMandala size={22} />
             <div className="flex flex-col text-left">
               <span className="font-cinzel text-gold text-[10px] md:text-xs tracking-[0.18em] md:tracking-[0.25em] font-semibold leading-tight">
-                NAVAGRAHA AWAKENING
+                {showSeasonBanner === 'S3' ? 'THE HIDDEN ENTRANCE' : 'NAVAGRAHA AWAKENING'}
               </span>
               <span className="font-rajdhani text-cream/55 text-[9px] md:text-[11px] tracking-wider md:tracking-widest uppercase mt-0.5 leading-tight">
-                The wheel turns again — Season II begins
+                {showSeasonBanner === 'S3' 
+                  ? 'Descend into the forgotten ruins — Season III begins' 
+                  : 'The wheel turns again — Season II begins'}
               </span>
             </div>
           </motion.div>
